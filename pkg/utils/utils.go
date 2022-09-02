@@ -20,6 +20,13 @@ func LoadDotEnv(envName string) string {
 	return envData
 }
 
+func ConnectDB(uri string) {
+	_, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+	if err != nil {
+		panic(err)
+	}
+}
+
 func ConnectCollection(uri string, dbName string, colName string) *mongo.Collection {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 	if err != nil {
